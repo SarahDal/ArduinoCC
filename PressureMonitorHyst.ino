@@ -82,8 +82,13 @@ void setup()
 
 /* --------------------------------------------
 /*  Each loop should comapare the reading against 
- *   the moving average, and if it is greater than 
- *   the specific amount, print this to the monitor
+ *  the moving average, and if it is greater than 
+ *  the specific amount, print this to the monitor.
+ *  when the threshold is reached, active is set 
+ *  so it can't be triggered again until it falls 
+ *  below the specific amount, stopping cars being
+ *  counted multiple times eg if they stop on the tube
+ *  for a length of time.
    --------------------------------------------*/
 void loop()
 {
