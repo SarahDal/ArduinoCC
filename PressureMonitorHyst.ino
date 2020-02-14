@@ -13,9 +13,6 @@
 
 const uint8_t airSensor(A0);  // connect pressure sensor from A0 pin to ground
 movingAvg airAvg(20);        // define the moving average object
-//
-//unsigned long new_time=0;     // set some variables for preventing reading multiple spikes
-unsigned long old_time=0;     // 
 
 RV3028 rtc;                  // get the clock going
 
