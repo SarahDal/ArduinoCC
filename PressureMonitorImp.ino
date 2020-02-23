@@ -13,12 +13,15 @@
 
 const uint8_t airSensor(A0);  // connect pressure sensor from A0 pin to ground
 movingAvg airAvg(20);        // define the moving average object
+//
+//unsigned long new_time=0;     // set some variables for preventing reading multiple spikes
+unsigned long old_time=0;     // 
 
 RV3028 rtc;                  // get the clock going
 
 String timestamp;           //
 
-int active;   
+     
 const int chipSelect = 8;      // SD card pin
 int ledPin = 5;                // the pin the LED is connected to
 
@@ -47,8 +50,7 @@ void setup()
    pinMode(airSensor, INPUT_PULLUP);   // air sensor
 
    airAvg.begin();                     //averages
-   active = false ;                   // setting up the hysteresis
-   
+ 
    pinMode(chipSelect, OUTPUT); 
    digitalWrite(chipSelect, HIGH); //ALWAYS pullup the ChipSelect pin with the SD library
    delay(100);
@@ -64,7 +66,7 @@ void setup()
   if (!SD.begin(chipSelect)) {
    Serial.println("Card failed, or not present");
     // don't do anything more:
- //   return;
+    return;
   }
   Serial.println("Card initialized.");
   Serial.print("Logging to: ");
@@ -82,25 +84,20 @@ void setup()
 
 /* --------------------------------------------
 /*  Each loop should comapare the reading against 
- *  the moving average, and if it is greater than 
- *  the specific amount, print this to the monitor.
- *  when the threshold is reached, active is set 
- *  so it can't be triggered again until it falls 
- *  below the specific amount, stopping cars being
- *  counted multiple times eg if they stop on the tube
- *  for a length of time.
+ *   the moving average, and if it is greater than 
+ *   the specific amount, print this to the monitor
    --------------------------------------------*/
 void loop()
 {
    rtc.updateTime();                       // get the time
    int pc = analogRead(airSensor);        // read the sensor
    int avg = airAvg.reading(pc);          // calculate the moving average
-   int avgPlus2 = avg + 2;               // to simplify conditional below
-//   unsigned long new_time = millis();    // this is to make sure peaks are spaced, in case a single count causes a double spike
- 
- delay(1);   // For some reason, the If statement that follows doesn't work without a delay here?????
+   int avgPlus = avg + 5;               // to simplify conditional below
+   unsigned long new_time = millis();    // this is to make sure peaks are spaced, in case a single count causes a double spike
    
-   if ((pc > avgPlus2) && !active)  
+   delay(1);   // For some reason, the If statement that follows doesn't work without a delay here?????
+    
+   if ((pc > avgPlus) && ((new_time - old_time) > 400))  // if the reading is greater than the average, print it
    {
 
     // write data to serial
@@ -124,12 +121,14 @@ void loop()
     logFile.close();
     Serial.println("done.");
 
-    active = true ;
+    old_time = new_time;  // spacing spikes
+
    }
-   
-    if (pc < (avg+1)) 
+   else
    {
-     active = false ;
+      delay(1);    // this is needed for some reason to make the IF statement work
+    
+
    }
 }
 
