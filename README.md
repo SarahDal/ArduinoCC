@@ -56,6 +56,9 @@ A5 (SCL) - SCL
 A4 (SDA) - SDA
 Gnd - Gnd
 VCC - 2-5V
+
+If you want to add in code to make the counter go to sleep (eg when a car park is closed overnight) connect the interrupt too.
+
 2 - INT
 
 Let’s connect up the Sparkmatch Shifting microSD cardbreakout:
