@@ -7,7 +7,7 @@ pressure_test.ino can be used to calibrate the pressure readings
 
 PressureMonitorImp.ino registers cars travelling over the rubber tube, and writes the time and date of each trigger to a microSD card
 
-##Project description
+## Project description
 
 While talking about electronics at work, my colleague metnioned a car counter he’d bought for a large sum of money that never really worked. I had the idea that I could build one myself, from Arduino, and thought I’d give it a try.
 
@@ -23,7 +23,7 @@ The plan was to use a pressure sensor to record when there is a change in pressu
 
 There was then weeks AND WEEKS of experimenting, testing and trialling, but here’s what I ended up with.  
 
-###Kit
+## Kit
 -Arduino Pro Mini 328 - 5V/16MHz
 -4mm internal diameter rubber fuel hose
 -Pelicase 1120
@@ -38,7 +38,7 @@ There was then weeks AND WEEKS of experimenting, testing and trialling, but here
 -Flash Memory Card, MicroSD Card
 -MPX5100DP Pressure Sensor
 
-###Connecting it up:
+## Connecting it up:
 The Arduino Pro Mini has offset A4 (SDA) and A5 (SCL) pins. This is a pain when using a breadboard because they don’t line up with any holes. The trick is to solder them to A2 and A3 respectively, turning those pins into SDA and SCL. It’s a bit fiddly! Here’s what it looks like with my mediocre soldering skills:
 
 
@@ -83,21 +83,21 @@ The pressure sensor works by measuring the pressure in one of the ports, and com
 
 (When I first set this up, I used the MPX5500. This measures up to 500kPa, which means it wasn’t sensitive enough to recognise a lot of cars. I switched to the MPX5100, which measures up to 100kPa, and the sensitivity was vastly improved. The company, NXP have a [forum on their website](https://community.nxp.com/) which was really helpful in figuring this out).
 
-##Code
+## Code
 The first code, pressure_test.ino, is used to calibrate the sensor. Set this up, and if it runs, blow into the tubes on the pressure sensor. The readings will display on the serial monitor. Make sure you see which port is measuring pressure, and how much it’s changing by. Have a look at the csv file too.
 
 The main code is PressureMonitorImp.ino. This  code waits until the reading from the pressure sensor is a certain amount above the average of the past twenty readings. This means it measures the data spikes. It also waits 400ms between readings, so for example, a car taking a while to cross the tube doesn’t register as many. (I think this could be improved with a debounce or similar instead however).
 
 Blow into it and see if it registers as a hit on the serial monitor and that it's written to the csv on the SD card.
 
-##Housing
+## Housing
 Drill a hole in the plastic housing case for the bulkhead connector, and seal it in place. To fix my breadboard I glued a bit of wood inside the case, very hi-tec. I snipped small bits of the black tube and used them as spacers under the prototyping boar.! Use a short length of the small transparent tubing to connect the correct pressure nozzle to the bulkhead connector. Connect up the switch and the battery, the black rubber tube to the outside and it is ready to deploy
 
 ![housing](https://user-images.githubusercontent.com/46293785/213927512-b8d7897e-858f-4851-a5f5-a51b65d03545.jpg)
 
 Fix your rubber tube to the road (I just use rawl plugs and saddle clips), and seal the other end. You can do this by using the T-connector at the end, and then fit a short piece of tube from onearm of the T to the other in a D-shape. Or just put some sealant in there and a screw, or however you like.
 
-##Testing and Calibrating
+## Testing and Calibrating
 With the first piece of code uploaded, take it outside, switch it on, and drive over the tube several times. Switch it off, and have a look at the.csv file on the microSD card to see what is happening. Every 10ms, a row will have been recorded, showing the date, pressure recorded and average pressure from the past twenty readings. By adding ina column simply counting the rows, and then dividing it by 100, I was able to make this graph showing the spikes by my car and my truck (and me) going overthe tube, with the number of seconds on the X axis:
 
 ![graph_annotated](https://user-images.githubusercontent.com/46293785/213927589-e6cc593c-daa3-4e46-8913-950740d5b2f1.JPG)
@@ -109,6 +109,6 @@ Once you’ve decided where you are going to measure cars, the black tube can be
 Set everything up, and try it out, see what data you get back. I am able to use a motion-activated camera and leave it in place for a few days, then compare the number of cars photographed vs the numbers recorded, but be wary of this (particularly in Europe) as you will need to consider data protection laws if you can’t put the camera where the reg plate isn’t recorded.
 Instead you might need to sit and count cars for a few hours! Keep adjusting the triggers, both the moving average and the trigger value, until it seems to work.
 
-##Power consumption
+## Power consumption
 I don’t have a way of measuring low power, but I calculated the power consumption from the components as using 193mA when triggered, and 11.3mA when at rest. I had it running for 147 hours off 1900mAh batteries (12mA average), but there weren’t many cars to trigger it. There are loads of ways to further reduce power consumption of an Arduino pro mini (see https://www.gammon.com.au/power), but this is low enough for me for now.
 
