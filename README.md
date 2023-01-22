@@ -39,8 +39,9 @@ There was then weeks AND WEEKS of experimenting, testing and trialling, but here
 - MPX5100DP Pressure Sensor
 
 ## Connecting it up:
-The Arduino Pro Mini has offset A4 (SDA) and A5 (SCL) pins. This is a pain when using a breadboard because they don’t line up with any holes. The trick is to solder them to A2 and A3 respectively, turning those pins into SDA and SCL. It’s a bit fiddly! Here’s what it looks like with my mediocre soldering skills:
+The Arduino Pro Mini has offset A4 (SDA) and A5 (SCL) pins. This is a pain when using a breadboard because they don’t line up with any holes. The trick is to solder them to A2 and A3 respectively, turning those pins into SDA and SCL. It’s a bit fiddly! Here’s what it looks like with my soldering skills:
 
+![ea49c5e9-5237-4ac8-aecd-99db6db747b0](https://user-images.githubusercontent.com/46293785/213927734-a5b2e295-23e3-4adb-9e8a-055d892fbb13.jpg)
 
 Soldering A2 to A4 and A3 to A5
 Breadboard everything first, so you can see how things connect up. Later, when you’re happy everything works, you can arrange them on a prototype board for soldering.
