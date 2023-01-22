@@ -44,6 +44,7 @@ The Arduino Pro Mini has offset A4 (SDA) and A5 (SCL) pins. This is a pain when 
 ![ea49c5e9-5237-4ac8-aecd-99db6db747b0](https://user-images.githubusercontent.com/46293785/213927734-a5b2e295-23e3-4adb-9e8a-055d892fbb13.jpg)
 
 Soldering A2 to A4 and A3 to A5
+
 Breadboard everything first, so you can see how things connect up. Later, when you’re happy everything works, you can arrange them on a prototype board for soldering.
 
 Arduino Pro Mini has two power pins: VCC and RAW. RAW is power in, which gets converted by the Arduino to 5V. The closer to 5V your power in is, the more efficient the Arduino will run. Take the power from the Arduino VCC pin for everything else.
@@ -55,9 +56,6 @@ A5 (SCL) - SCL
 A4 (SDA) - SDA
 Gnd - Gnd
 VCC - 2-5V
-
-I've a new line of code that allows the arduino to go to sleep when the car park is closed, so we need to connect the RTC interrupt to the arduino.
-
 2 - INT
 
 Let’s connect up the Sparkmatch Shifting microSD cardbreakout:
@@ -104,10 +102,15 @@ With the first piece of code uploaded, take it outside, switch it on, and drive 
 ![graph_annotated](https://user-images.githubusercontent.com/46293785/213927589-e6cc593c-daa3-4e46-8913-950740d5b2f1.JPG)
 
 Looking at this, the easiest would surely be to record a car whenever the reading is equal or greater than 60. However, we’re in the middle of a cold winter and I’m not sure how the pressure readings will change in hot, sunny weather – will the pressure in the tube increase greatly? So instead, I’m going to take a reading whenever the pressure is more than 7 above the average of the last ten readings.
+
 You can also see a peak for each wheel axle. I looked at the data, and the average time between each axle is 0.345s (min 0.22s, max 0.56s) so I think a delay of 200ms (0.20s) should work OK to stop a single axle being recorded more than once. This is only from a sample of 7 vehicle triggers though, so I might change this. 
+
 As for each vehicle causing two spikes (one for each axle) – the easiest way to deal with this is simply to divide the final number by two when you get the data off the SD card.
+
 Once you’ve decided where you are going to measure cars, the black tube can be held in place with saddle-clips fixed to the road with screws and rawlplugs. Try to position them so they won’t cause a puncture. For slow traffic (which I’m using, going in and out of a car park on a narrow track) this should be enough, but faster traffic may stretch and move the tube.
+
 Set everything up, and try it out, see what data you get back. I am able to use a motion-activated camera and leave it in place for a few days, then compare the number of cars photographed vs the numbers recorded, but be wary of this (particularly in Europe) as you will need to consider data protection laws if you can’t put the camera where the reg plate isn’t recorded.
+
 Instead you might need to sit and count cars for a few hours! Keep adjusting the triggers, both the moving average and the trigger value, until it seems to work.
 
 ## Power consumption
