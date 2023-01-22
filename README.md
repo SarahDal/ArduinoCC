@@ -24,19 +24,19 @@ The plan was to use a pressure sensor to record when there is a change in pressu
 There was then weeks AND WEEKS of experimenting, testing and trialling, but here’s what I ended up with.  
 
 ## Kit
--Arduino Pro Mini 328 - 5V/16MHz
--4mm internal diameter rubber fuel hose
--Pelicase 1120
--DC POWER JACK 2.1MM BARREL-TYPE PCB MOUNT
--Hook Up Wire Kit, 22 AWG
--Barrel jack power switch
--clear plastic tube, 4mm internal diamter
--SparkFun Level Shifting microSD Breakout
--RV 3028 RTC Breakout
--4mm double headed bulkhead connector
--4mm hose T-connector
--Flash Memory Card, MicroSD Card
--MPX5100DP Pressure Sensor
+- Arduino Pro Mini 328 - 5V/16MHz
+- 4mm internal diameter rubber fuel hose
+- Pelicase 1120
+- DC POWER JACK 2.1MM BARREL-TYPE PCB MOUNT
+- Hook Up Wire Kit, 22 AWG
+- Barrel jack power switch
+- clear plastic tube, 4mm internal diamter
+- SparkFun Level Shifting microSD Breakout
+- RV 3028 RTC Breakout
+- 4mm double headed bulkhead connector
+- 4mm hose T-connector
+- Flash Memory Card, MicroSD Card
+- MPX5100DP Pressure Sensor
 
 ## Connecting it up:
 The Arduino Pro Mini has offset A4 (SDA) and A5 (SCL) pins. This is a pain when using a breadboard because they don’t line up with any holes. The trick is to solder them to A2 and A3 respectively, turning those pins into SDA and SCL. It’s a bit fiddly! Here’s what it looks like with my mediocre soldering skills:
