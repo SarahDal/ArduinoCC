@@ -1,5 +1,8 @@
 # ArduinoCC
-Arduino Car Counter
+
+*This is one of the first arduino projects I made, in 2016. If I made this today, I would use ESP32 rather than an arduino, and LiPo batteries.*
+
+# Arduino Car Counter
 
 A rubber tube connected to a pressure sensor. Cars travelling over the tubing change the pressure, which is then recorded by the arduino.
 
@@ -19,7 +22,7 @@ Internet searching found the following projects that I used as inspiration:
 
 Plus a one more that is  now gone and only available on internet archive: [makercave](https://web.archive.org/web/20141222170015/https://wiki.makercave.org/wiki/Arduino_Vehicle_Traffic_Counter), and [tomorrow-lab](http://www.old.tomorrow-lab.com/lab16) which doesn't have all the files any more. All of these sites were incredibly useful, both for ideas, inspiration and of course code help.
 
-The plan was to use a pressure sensor to record when there is a change in pressure inside a sealed rubber tube, such as when a car drives over it. Simple! I wanted to make it as low-power as possible, so it would run for a good while before needing batteries changed. It’s to be deployed in a rural location, counting cars coming in and out of a car park.
+The plan was to use a pressure sensor to record when there is a change in pressure inside a sealed rubber tube, such as when a car drives over it. I wanted to make it as low-power as possible, so it would run for a good while before needing batteries changed. It’s to be deployed in a rural location, counting cars coming in and out of a car park.
 
 There was then weeks AND WEEKS of experimenting, testing and trialling, but here’s what I ended up with.  
 
@@ -114,7 +117,7 @@ Once you’ve decided where you are going to measure cars, the black tube can be
 
 Set everything up, and try it out, see what data you get back. I am able to use a motion-activated camera and leave it in place for a few days, then compare the number of cars photographed vs the numbers recorded, but be wary of this (particularly in Europe) as you will need to consider data protection laws if you can’t put the camera where the reg plate isn’t recorded.
 
-Instead you might need to sit and count cars for a few hours! Keep adjusting the triggers, both the moving average and the trigger value, until it seems to work.
+Instead you might need to sit and count cars for a few hours. Keep adjusting the triggers, both the moving average and the trigger value, until it seems to work.
 
 ## Power consumption
 I don’t have a way of measuring low power, but I calculated the power consumption from the components as using 193mA when triggered, and 11.3mA when at rest. I had it running for 147 hours off 1900mAh batteries (12mA average), but there weren’t many cars to trigger it. There are loads of ways to further reduce power consumption of an Arduino pro mini (see https://www.gammon.com.au/power), but this is low enough for me for now.
